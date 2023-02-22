@@ -1,0 +1,5 @@
+name: SavannaGateway
+version: '${project.version}'
+main: net.ramuremo.savannagateway.SavannaGateway
+api-version: 1.19
+authors: [ RamuneRemonedo ]

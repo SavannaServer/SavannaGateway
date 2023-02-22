@@ -1,0 +1,4 @@
+config:
+  discord:
+    token: "token"
+    channel-id: 0
