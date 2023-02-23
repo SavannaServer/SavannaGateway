@@ -36,7 +36,8 @@ public final class DiscordHandler {
                 plugin,
                 new BukkitMessageListener(),
                 new PlayerJoinListener(),
-                new PlayerQuitListener()
+                new PlayerQuitListener(),
+                new PlayerDeathListener()
         );
         jda.addEventListener(new MessageListener());
 
