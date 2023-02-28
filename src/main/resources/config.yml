@@ -6,6 +6,7 @@ config:
     password: "password"
 
   discord:
+    enable: false
     token: "token"
     channel-id: 0
 

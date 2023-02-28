@@ -42,6 +42,12 @@ public final class GatewayConfig extends ConfigFile {
             @Override public String getDefault() {return "password";}
             @Override public Class<String> getClazz() {return String.class;}
         };
+
+        Path<Boolean> DISCORD_ENABLE = new Path<Boolean>() {
+            @Override public String getPath() {return "discord.enable";}
+            @Override public Boolean getDefault() {return false;}
+            @Override public Class<Boolean> getClazz() {return Boolean.class;}
+        };
         Path<String> DISCORD_TOKEN = new Path<String>() {
             @Override public String getPath() {return "discord.token";}
             @Override public String getDefault() {return "token";}

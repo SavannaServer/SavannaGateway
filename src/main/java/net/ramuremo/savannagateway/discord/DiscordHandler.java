@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
+import java.time.Duration;
 
 public final class DiscordHandler {
     private final JDA jda;
@@ -37,27 +38,27 @@ public final class DiscordHandler {
                 new BukkitMessageListener(),
                 new PlayerJoinListener(),
                 new PlayerQuitListener(),
-                new PlayerDeathListener()
+                new PlayerDeathListener(),
+                new PlayerChangedWorldListener()
         );
         jda.addEventListener(new MessageListener());
 
         final EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setAuthor("サーバーがオンラインになりました!", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png");
         embedBuilder.setColor(Color.GREEN);
-        getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
+        getChannel().sendMessageEmbeds(embedBuilder.build()).submit();
     }
 
     public void shutdown() {
         final EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setAuthor("サーバーがオフラインになりました!", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png");
         embedBuilder.setColor(Color.RED);
-        getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
+        getChannel().sendMessageEmbeds(embedBuilder.build()).submit();
 
-        jda.shutdown();
+        jda.shutdownNow();
         try {
-            jda.awaitShutdown();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            jda.awaitShutdown(Duration.ofSeconds(5));
+        } catch (Exception ignored) {
         }
     }
 

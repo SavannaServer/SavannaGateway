@@ -20,18 +20,20 @@ public final class SavannaGateway extends JavaPlugin {
         instance = this;
 
         config = new GatewayConfig(this);
-        databaseHandler = new DatabaseHandler();
-        databaseHandler.connect(
-                config.getValue(GatewayConfig.Path.DATABASE_HOST),
-                config.getValue(GatewayConfig.Path.DATABASE_PORT),
-                config.getValue(GatewayConfig.Path.DATABASE_USERNAME),
-                config.getValue(GatewayConfig.Path.DATABASE_PASSWORD)
-        );
-        discordHandler = new DiscordHandler(
-                this,
-                config.getValue(GatewayConfig.Path.DISCORD_TOKEN),
-                config.getValue(GatewayConfig.Path.DISCORD_CHANNEL_ID)
-        );
+        //databaseHandler = new DatabaseHandler();
+        //databaseHandler.connect(
+        //        config.getValue(GatewayConfig.Path.DATABASE_HOST),
+        //        config.getValue(GatewayConfig.Path.DATABASE_PORT),
+        //        config.getValue(GatewayConfig.Path.DATABASE_USERNAME),
+        //        config.getValue(GatewayConfig.Path.DATABASE_PASSWORD)
+        //);
+        if (config.getValue(GatewayConfig.Path.DISCORD_ENABLE)) {
+            discordHandler = new DiscordHandler(
+                    this,
+                    config.getValue(GatewayConfig.Path.DISCORD_TOKEN),
+                    config.getValue(GatewayConfig.Path.DISCORD_CHANNEL_ID)
+            );
+        }
         if (config.getValue(GatewayConfig.Path.INVENTORY_SYNC_ENABLE)) {
             inventorySyncHandler = new InventorySyncHandler();
         }
@@ -44,7 +46,9 @@ public final class SavannaGateway extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        discordHandler.shutdown();
+        if (config.getValue(GatewayConfig.Path.DISCORD_ENABLE)) {
+            discordHandler.shutdown();
+        }
         getLogger().info("The plugin has been disabled.");
     }
 
