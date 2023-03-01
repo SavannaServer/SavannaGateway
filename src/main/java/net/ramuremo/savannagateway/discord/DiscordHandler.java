@@ -19,7 +19,6 @@ public final class DiscordHandler {
     private final long channelId;
 
     public DiscordHandler(@Nonnull JavaPlugin plugin, @Nonnull String token, long channelId) {
-
         final JDABuilder builder = JDABuilder.createDefault(token);
         builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         builder.setActivity(Activity.streaming("Server Working!", "https://savanna.ramuremo.net"));
@@ -33,6 +32,11 @@ public final class DiscordHandler {
             throw new RuntimeException(e);
         }
 
+        final EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setAuthor("サーバーがオンラインになりました!", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png");
+        embedBuilder.setColor(Color.GREEN);
+        getChannel().sendMessageEmbeds(embedBuilder.build()).complete();
+
         EventUtil.register(
                 plugin,
                 new BukkitMessageListener(),
@@ -42,18 +46,13 @@ public final class DiscordHandler {
                 new PlayerChangedWorldListener()
         );
         jda.addEventListener(new MessageListener());
-
-        final EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setAuthor("サーバーがオンラインになりました!", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png");
-        embedBuilder.setColor(Color.GREEN);
-        getChannel().sendMessageEmbeds(embedBuilder.build()).submit();
     }
 
     public void shutdown() {
         final EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setAuthor("サーバーがオフラインになりました!", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png", "https://cdn.discordapp.com/attachments/1077933337433346128/1078011052140265492/35f.png");
         embedBuilder.setColor(Color.RED);
-        getChannel().sendMessageEmbeds(embedBuilder.build()).submit();
+        getChannel().sendMessageEmbeds(embedBuilder.build()).complete();
 
         jda.shutdownNow();
         try {
