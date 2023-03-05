@@ -20,8 +20,8 @@ public final class SyncEnderChestListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         final int channel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_CHANNEL);
         final int oldChannel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_OLD_CHANNEL);
-        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaCore.getDatabaseHandler(), channel);
-        final EnderChestSyncCollection oldCollection = new EnderChestSyncCollection(SavannaCore.getDatabaseHandler(), oldChannel);
+        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaCore.getInstance().getDatabaseHandler(), channel);
+        final EnderChestSyncCollection oldCollection = new EnderChestSyncCollection(SavannaCore.getInstance().getDatabaseHandler(), oldChannel);
 
         final Player player = event.getPlayer();
         final EnderChestSync enderChestSync = collection.find(player.getUniqueId());
@@ -45,7 +45,7 @@ public final class SyncEnderChestListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         final int channel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_CHANNEL);
-        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaCore.getDatabaseHandler(), channel);
+        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaCore.getInstance().getDatabaseHandler(), channel);
         final Player player = event.getPlayer();
 
         final EnderChestSync enderChestSync = collection.find(player.getUniqueId());

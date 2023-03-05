@@ -6,7 +6,7 @@
 
     <groupId>net.ramuremo</groupId>
     <artifactId>savanna-gateway</artifactId>
-    <version>2023.35.2</version>
+    <version>2023.35.3</version>
     <packaging>jar</packaging>
 
     <name>SavannaGateway</name>
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>tokyo.ramune</groupId>
             <artifactId>savanna-core</artifactId>
-            <version>2023.36.4</version>
+            <version>2023.36.5</version>
         </dependency>
     </dependencies>
 </project>
