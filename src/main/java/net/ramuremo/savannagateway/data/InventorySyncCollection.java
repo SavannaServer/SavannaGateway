@@ -3,8 +3,8 @@ package net.ramuremo.savannagateway.data;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import net.ramuremo.savannagateway.database.DatabaseHandler;
 import org.bukkit.inventory.PlayerInventory;
+import tokyo.ramune.savannacore.database.DatabaseHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -14,7 +14,7 @@ public final class InventorySyncCollection {
     private final DBCollection inventorySyncCollection;
 
     public InventorySyncCollection(@Nonnull DatabaseHandler databaseHandler, int channel) {
-        this.inventorySyncCollection = databaseHandler.getDB().getCollection("inventory-sync-" + channel);
+        this.inventorySyncCollection = databaseHandler.getClient().getDB("savanna-gateway").getCollection("inventory-sync-" + channel);
     }
 
     @Nullable

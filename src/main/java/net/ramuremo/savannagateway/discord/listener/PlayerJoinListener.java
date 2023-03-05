@@ -1,7 +1,6 @@
 package net.ramuremo.savannagateway.discord.listener;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.ramuremo.savannagateway.SavannaGateway;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

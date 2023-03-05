@@ -7,8 +7,8 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.ramuremo.savannagateway.discord.listener.*;
-import net.ramuremo.savannagateway.utility.EventUtil;
 import org.bukkit.plugin.java.JavaPlugin;
+import tokyo.ramune.savannacore.utility.EventUtil;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -62,7 +62,15 @@ public final class DiscordHandler {
         }
     }
 
-    public JDA getJda() {return jda;}
-    public long getChannelId() {return channelId;}
-    public TextChannel getChannel() {return jda.getTextChannelById(channelId);}
+    public JDA getJda() {
+        return jda;
+    }
+
+    public long getChannelId() {
+        return channelId;
+    }
+
+    public TextChannel getChannel() {
+        return jda.getTextChannelById(channelId);
+    }
 }
