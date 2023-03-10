@@ -47,7 +47,6 @@ public final class SavannaGateway extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        final Merchant merchant = (Merchant) Bukkit.createInventory(null, InventoryType.MERCHANT);
 
         config = new GatewayConfig(this);
         databaseHandler = new DatabaseHandler();
