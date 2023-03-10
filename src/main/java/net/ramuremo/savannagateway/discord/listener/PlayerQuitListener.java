@@ -19,6 +19,6 @@ public final class PlayerQuitListener implements Listener {
         builder.setAuthor(player.getName() + "が退出しました", iconUrl, iconUrl);
         builder.setColor(Color.RED);
 
-        SavannaGateway.getDiscordHandler().getChannel().sendMessageEmbeds(builder.build()).queue();
+        SavannaGateway.getInstance().getDiscordHandler().getChannel().sendMessageEmbeds(builder.build()).queue();
     }
 }

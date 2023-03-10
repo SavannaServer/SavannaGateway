@@ -2,8 +2,6 @@ config:
   database:
     host: "localhost"
     port: 27017
-    user: "root"
-    password: "password"
 
   discord:
     enable: false

@@ -1,43 +1,60 @@
 package net.ramuremo.savannagateway;
 
+import net.kyori.adventure.text.Component;
 import net.ramuremo.savannagateway.config.GatewayConfig;
+import net.ramuremo.savannagateway.database.DatabaseHandler;
 import net.ramuremo.savannagateway.discord.DiscordHandler;
 import net.ramuremo.savannagateway.enderchestsync.EnderChestSyncHandler;
 import net.ramuremo.savannagateway.inventorysync.InventorySyncHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SavannaGateway extends JavaPlugin {
     private static SavannaGateway instance;
-    private static GatewayConfig config;
-    private static DiscordHandler discordHandler;
-    private static InventorySyncHandler inventorySyncHandler;
-    private static EnderChestSyncHandler enderChestSyncHandler;
+    private GatewayConfig config;
+    private DatabaseHandler databaseHandler;
+    private DiscordHandler discordHandler;
+    private InventorySyncHandler inventorySyncHandler;
+    private EnderChestSyncHandler enderChestSyncHandler;
 
     public static SavannaGateway getInstance() {
         return instance;
     }
 
-    public static GatewayConfig getConfigFile() {
+    public GatewayConfig getConfigFile() {
         return config;
     }
 
-    public static DiscordHandler getDiscordHandler() {
+    public DatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
+    }
+
+    public DiscordHandler getDiscordHandler() {
         return discordHandler;
     }
 
-    public static InventorySyncHandler getInventorySyncHandler() {
+    public InventorySyncHandler getInventorySyncHandler() {
         return inventorySyncHandler;
     }
 
-    public static EnderChestSyncHandler getEnderChestSyncHandler() {
+    public EnderChestSyncHandler getEnderChestSyncHandler() {
         return enderChestSyncHandler;
     }
 
     @Override
     public void onEnable() {
         instance = this;
+        final Merchant merchant = (Merchant) Bukkit.createInventory(null, InventoryType.MERCHANT);
 
         config = new GatewayConfig(this);
+        databaseHandler = new DatabaseHandler();
+        databaseHandler.connect(
+                config.getValue(GatewayConfig.Path.DATABASE_HOST),
+                config.getValue(GatewayConfig.Path.DATABASE_PORT)
+        );
         if (config.getValue(GatewayConfig.Path.DISCORD_ENABLE)) {
             discordHandler = new DiscordHandler(
                     this,

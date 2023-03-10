@@ -21,6 +21,6 @@ public final class PlayerChangedWorldListener implements Listener {
         builder.setAuthor(player.getName() + "ワールド移動 " + from.getName() + " → " + to.getName(), iconUrl, iconUrl);
         builder.setColor(new Color(0xFF6B006B, true));
 
-        SavannaGateway.getDiscordHandler().getChannel().sendMessageEmbeds(builder.build()).queue();
+        SavannaGateway.getInstance().getDiscordHandler().getChannel().sendMessageEmbeds(builder.build()).queue();
     }
 }

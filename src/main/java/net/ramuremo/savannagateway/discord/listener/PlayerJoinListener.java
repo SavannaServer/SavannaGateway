@@ -19,6 +19,6 @@ public final class PlayerJoinListener implements Listener {
         builder.setAuthor(player.getName() + "が参加しました", iconUrl, iconUrl);
         builder.setColor(Color.GREEN);
 
-        SavannaGateway.getDiscordHandler().getChannel().sendMessageEmbeds(builder.build()).queue();
+        SavannaGateway.getInstance().getDiscordHandler().getChannel().sendMessageEmbeds(builder.build()).queue();
     }
 }

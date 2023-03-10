@@ -3,8 +3,8 @@ package net.ramuremo.savannagateway.data;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import net.ramuremo.savannagateway.database.DatabaseHandler;
 import org.bukkit.inventory.PlayerInventory;
-import tokyo.ramune.savannacore.database.DatabaseHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

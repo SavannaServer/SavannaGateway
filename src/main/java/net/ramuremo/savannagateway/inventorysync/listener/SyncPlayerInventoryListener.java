@@ -11,17 +11,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.PlayerInventory;
-import tokyo.ramune.savannacore.SavannaCore;
 
 import javax.annotation.Nonnull;
 
 public final class SyncPlayerInventoryListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        final int channel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.INVENTORY_SYNC_CHANNEL);
-        final int oldChannel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.INVENTORY_SYNC_OLD_CHANNEL);
-        final InventorySyncCollection collection = new InventorySyncCollection(SavannaCore.getInstance().getDatabaseHandler(), channel);
-        final InventorySyncCollection oldCollection = new InventorySyncCollection(SavannaCore.getInstance().getDatabaseHandler(), oldChannel);
+        final int channel = SavannaGateway.getInstance().getConfigFile().getValue(GatewayConfig.Path.INVENTORY_SYNC_CHANNEL);
+        final int oldChannel = SavannaGateway.getInstance().getConfigFile().getValue(GatewayConfig.Path.INVENTORY_SYNC_OLD_CHANNEL);
+        final InventorySyncCollection collection = new InventorySyncCollection(SavannaGateway.getInstance().getDatabaseHandler(), channel);
+        final InventorySyncCollection oldCollection = new InventorySyncCollection(SavannaGateway.getInstance().getDatabaseHandler(), oldChannel);
 
         final Player player = event.getPlayer();
         final InventorySync inventorySync = collection.find(player.getUniqueId());
@@ -47,8 +46,8 @@ public final class SyncPlayerInventoryListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        final int channel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.INVENTORY_SYNC_CHANNEL);
-        final InventorySyncCollection collection = new InventorySyncCollection(SavannaCore.getInstance().getDatabaseHandler(), channel);
+        final int channel = SavannaGateway.getInstance().getConfigFile().getValue(GatewayConfig.Path.INVENTORY_SYNC_CHANNEL);
+        final InventorySyncCollection collection = new InventorySyncCollection(SavannaGateway.getInstance().getDatabaseHandler(), channel);
         final Player player = event.getPlayer();
 
         final InventorySync inventorySync = collection.find(player.getUniqueId());

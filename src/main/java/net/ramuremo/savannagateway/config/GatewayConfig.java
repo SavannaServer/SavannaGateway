@@ -1,7 +1,6 @@
 package net.ramuremo.savannagateway.config;
 
 import org.bukkit.plugin.Plugin;
-import tokyo.ramune.savannacore.config.ConfigFile;
 
 import javax.annotation.Nonnull;
 
@@ -23,6 +22,38 @@ public final class GatewayConfig extends ConfigFile {
     }
 
     public interface Path<T> {
+        Path<String> DATABASE_HOST = new Path<String>() {
+            @Override
+            public String getPath() {
+                return "database.host";
+            }
+
+            @Override
+            public String getDefault() {
+                return "localhost";
+            }
+
+            @Override
+            public Class<String> getClazz() {
+                return String.class;
+            }
+        };
+        Path<Integer> DATABASE_PORT = new Path<Integer>() {
+            @Override
+            public String getPath() {
+                return "database.port";
+            }
+
+            @Override
+            public Integer getDefault() {
+                return 27017;
+            }
+
+            @Override
+            public Class<Integer> getClazz() {
+                return Integer.class;
+            }
+        };
         Path<Boolean> DISCORD_ENABLE = new Path<Boolean>() {
             @Override
             public String getPath() {

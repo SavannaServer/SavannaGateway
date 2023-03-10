@@ -17,7 +17,7 @@ import java.util.List;
 public final class MessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getChannel().getIdLong() != SavannaGateway.getDiscordHandler().getChannelId()) return;
+        if (event.getChannel().getIdLong() != SavannaGateway.getInstance().getDiscordHandler().getChannelId()) return;
         if (event.getAuthor().isBot() || event.getAuthor().isSystem()) return;
         final Member member = event.getMember();
         if (member == null) return;

@@ -11,17 +11,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
-import tokyo.ramune.savannacore.SavannaCore;
 
 import javax.annotation.Nonnull;
 
 public final class SyncEnderChestListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        final int channel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_CHANNEL);
-        final int oldChannel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_OLD_CHANNEL);
-        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaCore.getInstance().getDatabaseHandler(), channel);
-        final EnderChestSyncCollection oldCollection = new EnderChestSyncCollection(SavannaCore.getInstance().getDatabaseHandler(), oldChannel);
+        final int channel = SavannaGateway.getInstance().getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_CHANNEL);
+        final int oldChannel = SavannaGateway.getInstance().getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_OLD_CHANNEL);
+        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaGateway.getInstance().getDatabaseHandler(), channel);
+        final EnderChestSyncCollection oldCollection = new EnderChestSyncCollection(SavannaGateway.getInstance().getDatabaseHandler(), oldChannel);
 
         final Player player = event.getPlayer();
         final EnderChestSync enderChestSync = collection.find(player.getUniqueId());
@@ -44,8 +43,8 @@ public final class SyncEnderChestListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        final int channel = SavannaGateway.getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_CHANNEL);
-        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaCore.getInstance().getDatabaseHandler(), channel);
+        final int channel = SavannaGateway.getInstance().getConfigFile().getValue(GatewayConfig.Path.ENDERCHEST_SYNC_CHANNEL);
+        final EnderChestSyncCollection collection = new EnderChestSyncCollection(SavannaGateway.getInstance().getDatabaseHandler(), channel);
         final Player player = event.getPlayer();
 
         final EnderChestSync enderChestSync = collection.find(player.getUniqueId());
